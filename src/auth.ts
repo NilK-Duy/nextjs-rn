@@ -23,20 +23,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           }
         })
 
-        if(res.statusCode === 201) {
+        if (res.statusCode === 201) {
+          // return user object with their profile data
+
           return {
             _id: res.data?.user?._id,
             name: res.data?.user?.name,
             email: res.data?.user?.email,
-            access_token: res.data?.access_token
-          }
-        } else if(+res.statusCode === 401) {
+            access_token: res.data?.access_token,
+          };
+        } else if (+res.statusCode === 401) {
           throw new InvalidEmailPasswordError()
-        } else if(+res.statusCode === 400) {
+        } else if (+res.statusCode === 400) {
           throw new InactiveAccountError()
         } else {
           throw new Error("Internal server error")
         }
+
       },
     }),
   ],
@@ -46,17 +49,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     jwt({ token, user }) {
       if (user) { // User is available during sign-in
-        token.user = (user as IUser)
+        token.user = (user as IUser);
       }
       return token
     },
     session({ session, token }) {
-      (session.user as IUser) = token.user
+      (session.user as IUser) = token.user;
       return session
     },
     authorized: async ({ auth }) => {
-      // Logged in users are authenticated, otherwise redirect to login page
+      // Logged in users are authenticated, 
+      //otherwise redirect to login page
       return !!auth
-    }
-  }
+    },
+  },
 })
