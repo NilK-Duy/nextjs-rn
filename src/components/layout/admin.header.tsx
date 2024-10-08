@@ -53,7 +53,7 @@ const AdminHeader = (props: any) => {
         <Dropdown menu={{ items }}>
           <a onClick={(e) => e.preventDefault()} style={{ color: "unset", lineHeight: "0 !important", marginRight: 20 }}>
             <Space>
-              Welcome {session?.user?.email ?? ""}
+              Welcome {session?.user?.name ?? ""}
               <DownOutlined />
             </Space>
           </a>

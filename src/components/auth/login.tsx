@@ -1,6 +1,6 @@
 "use client";
-import { Button, Col, Divider, Form, Input, notification, Row } from "antd";
-import { ArrowLeftOutlined } from "@ant-design/icons";
+import { Button, Col, Dropdown, Form, Input, MenuProps, notification, Row, Space } from "antd";
+import { ArrowLeftOutlined, DownOutlined } from "@ant-design/icons";
 import Link from "next/link";
 import { authenticate } from "@/utils/actions";
 import { useRouter } from "next/navigation";
@@ -37,6 +37,19 @@ const Login = () => {
       router.push("/dashboard");
     }
   };
+
+  const items: MenuProps["items"] = [
+    {
+      label: "Email: admin.ryan@gmail.com",
+      key: "1",
+      disabled: true,
+    },
+    {
+      label: "Password: Ryan123456",
+      key: "2",
+      disabled: true,
+    },
+  ];
 
   return (
     <>
@@ -94,11 +107,20 @@ const Login = () => {
                   </Button>
                 </div>
               </Form.Item>
+              <Form.Item>
+                <Dropdown menu={{ items }} trigger={["click"]}>
+                  <a>
+                    <Space style={{ fontWeight: "bold" }}>
+                      TEST ACCOUNT
+                      <DownOutlined />
+                    </Space>
+                  </a>
+                </Dropdown>
+              </Form.Item>
             </Form>
             <Link href={"/"}>
               <ArrowLeftOutlined /> Quay lại trang chủ
             </Link>
-            <Divider />
             <div style={{ textAlign: "center" }}>
               Chưa có tài khoản? <Link href={"/auth/register"}>Đăng ký tại đây</Link>
             </div>
