@@ -5,6 +5,9 @@
     "name": "Ryan",
     "url": "https://ngkhanhduy.id.vn/"
   },
+  "engines": {
+    "node": "20.11.1"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
